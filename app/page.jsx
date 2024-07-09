@@ -7,6 +7,9 @@ export default function Home() {
       <div className="h-[70vh] grid place-items-center">
       <Game />
       </div>
+      <footer className="bg-black opacity-65 w-full text-center">
+        Made by Dipesh Ranjan with ❤️
+      </footer>
     </main>
   );
 }
