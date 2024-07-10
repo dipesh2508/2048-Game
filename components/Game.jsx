@@ -4,6 +4,7 @@ import { initializeGrid } from "@/utils/initializeGrid";
 import { addNumber } from "@/utils/addNumber";
 import { moveLeft, moveDown, moveRight, moveUp } from "@/utils/move";
 import { checkGameOver } from "@/utils/checkGameOver";
+import { checkGameWon } from "@/utils/checkGameWon";
 import { SIZE } from "@/constants/size";
 
 const numberClasses = {
@@ -28,6 +29,7 @@ const Game = () => {
   );
   const [initialized, setInitialized] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [gameWon, setGameWon] = useState(false);
 
   useEffect(() => {
     setGrid(initializeGrid());
@@ -55,6 +57,9 @@ const Game = () => {
         if (checkGameOver(newGrid)) {
           setGameOver(true);
         }
+        if (checkGameWon(newGrid)) {
+          setGameWon(true);
+        }
       }
     },
     [grid, initialized, gameOver]
@@ -77,6 +82,20 @@ const Game = () => {
             onClick={() => {
               setGrid(initializeGrid());
               setGameOver(false);
+            }}
+          >
+            Restart
+          </button>
+        </div>
+      )}
+      {gameWon && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center gap-4 justify-center bg-gray-900 bg-opacity-75 z-50">
+          <h1 className="text-4xl">You Won!</h1>
+          <button
+            className="bg-blue-500 rounded-lg text-white px-4 py-2 mt-4"
+            onClick={() => {
+              setGrid(initializeGrid());
+              setGameWon(false);
             }}
           >
             Restart
