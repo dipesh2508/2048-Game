@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 2048 Game
+
+A 2048 game created by Dipesh Ranjan.
+
+## Technologies Used
+
+- Next.js 14
+- JavaScript
+- Tailwind CSS
+- Lodash (for deep cloning the grid)
+
+## Game Algorithm
+
+1. **Initialize Grid**
+   - Create a 4x4 grid filled with zeros.
+   - Add two random numbers (2 or 4) in random empty spots on the grid.
+
+2. **Add a Number**
+   - Find all empty spots on the grid.
+   - Choose a random spot and place a 2 or 4 there.
+
+3. **Move Left**
+   - For each row:
+     - Filter out zeros.
+     - Combine adjacent equal numbers by adding them together and setting the next cell to zero.
+     - Filter out zeros again.
+     - Fill the remaining cells with zeros to maintain the grid size.
+
+4. **Rotate Grid**
+   - Rotate the grid 90 degrees clockwise.
+
+5. **Move Right, Up, and Down**
+   - Use the moveLeft logic by rotating the grid appropriately:
+     - **moveRight**: Rotate 180 degrees, move left, rotate back 180 degrees.
+     - **moveUp**: Rotate 270 degrees, move left, rotate back 90 degrees.
+     - **moveDown**: Rotate 90 degrees, move left, rotate back 270 degrees.
+
+6. **Check Game Over**
+   - Check if there are any empty cells. If so, the game is not over.
+   - Check if there are any possible moves by looking for adjacent equal cells horizontally and vertically. If found, the game is not over.
+   - If no empty cells and no possible moves, the game is over.
+
+7. **Check Game Won**
+   - Check if any cell in the grid contains the number 2048.
+   - If found, display a "Game Won" message and provide an option to restart the game.
+
+8. **Handle Key Down Events**
+   - Listen for keydown events for the arrow keys.
+   - Depending on the key pressed, move the grid left, right, up, or down.
+   - After a move, add a new number to the grid.
+   - Check if the game is over or won after each move.
 
 ## Getting Started
 
-First, run the development server:
+To run the project locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone the repository.
+2. Install the dependencies using `npm install`.
+3. Run the development server using `npm run dev`.
